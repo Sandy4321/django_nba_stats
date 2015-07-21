@@ -13,7 +13,7 @@ cur = db.cursor()
 #             "to_year INTEGER);")
 
 ###########################
-#SCRAPE PLAYER/ ID AND POPULATE MySQL#
+#SCRAPE PLAYER/ ID AND POPULATE MySQL
 ###########################
 player_id_url = 'http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2014-15'
 player_id_json = requests.get(player_id_url).json()
@@ -62,7 +62,7 @@ for i  in range(0, len(player_id_json['resultSets'][0]['rowSet'])):
     player_id_index[i] =id
 
 ###########################
-#SCRAPE GAME LOG AND POPULATE MySQL#
+#SCRAPE GAME LOG AND POPULATE MySQL
 ###########################
 id_list = []
 cur.execute("SELECT * FROM id_player WHERE to_year = 2015 && from_year < 2015;")
