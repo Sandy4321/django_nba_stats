@@ -1,3 +1,2 @@
 # nba_analysis
-NBA Statistical Analysis Project
-html, css, django, mysql practice
+NBA Statistical Analysis Project (html, css, django, mysql practice)
