@@ -6,9 +6,9 @@ def calc_and_store_averages(season):
     id_list = []
 
     season_string = '2' + str(season-1)
-    # cur.execute("SELECT * FROM id_player WHERE to_year=" + str(season) + " AND from_year<" + str(season) + ";")
-    # for row in cur:
-    #     id_list.append(int(row[1]))
+    cur.execute("SELECT * FROM id_player WHERE to_year=" + str(season) + " AND from_year<" + str(season) + ";")
+    for row in cur:
+        id_list.append(int(row[1]))
 
     for players in range(0, len(id_list)):
         insert_string = "INSERT INTO avg_2015 VALUES(" + str(id_list[players]) + ", "
