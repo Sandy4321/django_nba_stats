@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% block title %} NBA Statistical Analysis Project {% endblock %}
+{% block content %}
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand">NBA Stats Analysis</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
+          <li><a href="{% url 'stats:fantasy' %}">Fantasy Basketball Analysis</a></li>
+          <li><a>Statistical Learning</a></li>
+          <li><a>About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>NBA Statistical Analysis Project</h1>
+        <h2>Basic Stats: Stats you would find on any other sports site.</h2>
+        <br>
+        <p>(click on player name for detailed game logs!!!)</p>         
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h3>2014-15 Regular Season Standard Statistics</h3>
+      <div class="table-responsive">
+        <table id="stats_main" class="table table-bordered sortable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>GP</th>
+              <th>Min</th>
+              <th>FGM</th>
+              <th>FGA</th>
+              <th>FG%</th>
+              <th>3PM</th>
+              <th>3PA</th>
+              <th>3P%</th>
+              <th>FTM</th>
+              <th>FTA</th>
+              <th>FT%</th>
+              <th>OREB</th>
+              <th>DREB</th>
+              <th>REB</th>
+              <th>AST</th>
+              <th>TO</th>
+              <th>STL</th>
+              <th>BLK</th>
+              <th>PF</th>
+              <th>PPG</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for player in players %}
+            <tr>
+              <td><a href="{% url 'stats:gamelog' p_id=player.player_id %}">{{player.first_name | title}} {{player.last_name | title}}</a></td>
+              <td>{{player.games_played}}</td>
+              <td>{{player.min | floatformat:2}}</td>
+              <td>{{player.fgm | floatformat:2}}</td>
+              <td>{{player.fga | floatformat:2}}</td>
+              <td>{{player.fg_pct | floatformat:2}}</td>
+              <td>{{player.fg3m | floatformat:2}}</td>
+              <td>{{player.fg3a | floatformat:2}}</td>
+              <td>{{player.fg3_pct | floatformat:2}}</td>
+              <td>{{player.ftm | floatformat:2}}</td>
+              <td>{{player.fta | floatformat:2}}</td>
+              <td>{{player.ft_pct | floatformat:2}}</td>
+              <td>{{player.oreb | floatformat:2}}</td>
+              <td>{{player.dreb | floatformat:2}}</td>
+              <td>{{player.reb | floatformat:2}}</td>
+              <td>{{player.ast | floatformat:2}}</td>
+              <td>{{player.tov | floatformat:2}}</td>
+              <td>{{player.stl | floatformat:2}}</td>
+              <td>{{player.blk | floatformat:2}}</td>
+              <td>{{player.foul | floatformat:2}}</td>
+              <td>{{player.pts | floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/sorttable.js' %}"></script>
+    <script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}

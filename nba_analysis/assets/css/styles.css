@@ -1,0 +1,73 @@
+/*********
+GENERAL
+**********/
+header div h1,
+header div h2,
+header div p,
+section div h1,
+section div h3{
+  font-family: 'Nixie One', cursive;
+}
+
+/*******
+GENERAL SECTION
+*******/
+section{
+  margin: -30px 0 0 0;
+}
+
+/*********
+GENERAL Table Styles
+**********/
+th{
+  cursor: pointer;
+}
+
+tr:nth-child(even) {
+    background-color: #F8F8F8;
+}
+
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
+
+/*********
+Images
+**********/
+#player_img{
+  background-color: #EEE;
+  border-radius: 100%;
+}
+
+/*********
+Basic Stats Page
+**********/
+#stats_main tr, #stats_main th{
+  font-size: 0.80em;
+}
+
+/*********
+Game Log Page
+**********/
+#game_log{
+  margin-top: 25px;
+}
+
+#game_log tr, #game_log th{
+  font-family: 'Nixie One', cursive;
+  font-size: 1.6em;
+}
+
+
+/*********
+Fantasy User Ranking Page
+**********/
+#vote_button{
+  max-width:1%;
+  height:auto;
+  margin:0px -40px;
+}
+
+#name_align{
+  vertical-align:center;
+}

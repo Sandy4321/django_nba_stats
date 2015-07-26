@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% block title %} NBA Statistical Analysis Project {% endblock %}
+{% block content %}
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand">NBA Stats Analysis</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
+          <li><a href="{% url 'stats:fantasy' %}">Fantasy Basketball Analysis</a></li>
+          <li><a>Statistical Learning</a></li>
+          <li><a>About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>NBA Statistical Analysis Project</h1>
+        <h2>Game Logs: Monitor players game by game.</h2>
+        <br>
+        <p>(scroll down to see pretty graphs!!!)</p>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <h1 class="text-center" style="font-size:3.5em;">{{player_name.first_name | title}} {{player_name.last_name | title}}</h1>
+      <div class="row" style="margin-top:30px">
+        <div class="col-md-4">
+          <img src="http://stats.nba.com/media/players/700/{{player_name.id}}.png?interpolation=lanczos-none&resize=*:450px" class="img-responsive" id="player_img" style="margin-top:-50px">
+          <!-- <img src="http://stats.nba.com/media/players/230x185/{{player_name.id}}.png" class="img-responsive" id="player_img"> -->
+        </div>
+        <div class="col-md-8 table-responsive">
+          <table id="game_log" class="table">
+            <thead>
+              <tr>
+                <th>PPG</th>
+                <th>RPG</th>
+                <th>APG</th>
+                <th>STL</th>
+                <th>BLK</th>
+                <th>TO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{player_avg.pts}}</td>
+                <td>{{player_avg.reb}}</td>
+                <td>{{player_avg.ast}}</td>
+                <td>{{player_avg.stl}}</td>
+                <td>{{player_avg.blk}}</td>
+                <td>{{player_avg.tov}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table id="game_log" class="table">
+            <thead>
+              <tr>
+                <th>FGM</th>
+                <th>FG%</th>
+                <th>FTM</th>
+                <th>FT%</th>
+                <th>3PM</th>
+                <th>3P%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{player_avg.fgm}}</td>
+                <td>{{player_avg.fg_pct}}</td>
+                <td>{{player_avg.ftm}}</td>
+                <td>{{player_avg.ft_pct}}</td>
+                <td>{{player_avg.fg3m}}</td>
+                <td>{{player_avg.fg3_pct}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

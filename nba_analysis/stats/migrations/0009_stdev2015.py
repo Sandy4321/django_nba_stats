@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('stats', '0008_auto_20150722_1701'),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='stdev2015',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('first_name', models.CharField(max_length=50, null=True, blank=True)),
+                ('last_name', models.CharField(max_length=50, null=True, blank=True)),
+                ('games_played', models.IntegerField(null=True, blank=True)),
+                ('min', models.FloatField(null=True, blank=True)),
+                ('fgm', models.FloatField(null=True, blank=True)),
+                ('fga', models.FloatField(null=True, blank=True)),
+                ('fg_pct', models.FloatField(null=True, blank=True)),
+                ('fg3m', models.FloatField(null=True, blank=True)),
+                ('fg3a', models.FloatField(null=True, blank=True)),
+                ('fg3_pct', models.FloatField(null=True, blank=True)),
+                ('ftm', models.FloatField(null=True, blank=True)),
+                ('fta', models.FloatField(null=True, blank=True)),
+                ('ft_pct', models.FloatField(null=True, blank=True)),
+                ('oreb', models.FloatField(null=True, blank=True)),
+                ('dreb', models.FloatField(null=True, blank=True)),
+                ('reb', models.FloatField(null=True, blank=True)),
+                ('ast', models.FloatField(null=True, blank=True)),
+                ('stl', models.FloatField(null=True, blank=True)),
+                ('blk', models.FloatField(null=True, blank=True)),
+                ('tov', models.FloatField(null=True, blank=True)),
+                ('atr', models.FloatField(null=True, blank=True)),
+                ('pts', models.FloatField(null=True, blank=True)),
+            ],
+            options={
+                'db_table': 'fantasy_stdev_2015',
+                'managed': False,
+            },
+        ),
+    ]
