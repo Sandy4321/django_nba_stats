@@ -139,3 +139,39 @@ class stdev2015(models.Model):
     class Meta:
         managed = False
         db_table = 'fantasy_stdev_2015'
+
+class UserRankings2015(models.Model):
+    id = models.IntegerField(primary_key=True)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+    games_played = models.FloatField(blank=True, null=True)
+    min = models.FloatField(blank=True, null=True)
+    fgm = models.FloatField(blank=True, null=True)
+    fga = models.FloatField(blank=True, null=True)
+    fg_pct = models.FloatField(blank=True, null=True)
+    fg3m = models.FloatField(blank=True, null=True)
+    fg3a = models.FloatField(blank=True, null=True)
+    fg3_pct = models.FloatField(blank=True, null=True)
+    ftm = models.FloatField(blank=True, null=True)
+    fta = models.FloatField(blank=True, null=True)
+    ft_pct = models.FloatField(blank=True, null=True)
+    oreb = models.FloatField(blank=True, null=True)
+    dreb = models.FloatField(blank=True, null=True)
+    reb = models.FloatField(blank=True, null=True)
+    ast = models.FloatField(blank=True, null=True)
+    stl = models.FloatField(blank=True, null=True)
+    blk = models.FloatField(blank=True, null=True)
+    tov = models.FloatField(blank=True, null=True)
+    atr = models.FloatField(blank=True, null=True)
+    pts = models.FloatField(blank=True, null=True)
+    user_rank = models.IntegerField(blank=True, null=True)
+
+    def getSum(self):
+        return self.games_played + self.fgm +\
+            self.fg_pct + self.fg3m + self.fg3_pct + self.ftm +\
+            self.ft_pct + self.reb + self.ast + self.stl + self.blk+\
+            self.tov + self.atr + self.pts
+
+    class Meta:
+        managed = False
+        db_table = 'user_rankings_2015'

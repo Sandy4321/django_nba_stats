@@ -12,7 +12,13 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
-          <li class="active"><a href="{% url 'stats:fantasy' %}">Fantasy Basketball Analysis</a></li>
+          <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fantasy Basketball Analysis <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'stats:user_rank' %}">User Rankings</a></li>
+              <li class="active"><a href="{% url 'stats:fantasy' %}">Calculated Rankings</a></li>
+            </ul>
+          </li>
           <li><a>Statistical Learning</a></li>
           <li><a>About</a></li>
         </ul>
@@ -23,9 +29,9 @@
     <div class="jumbotron">
       <div class="container">
         <h1>NBA Statistical Analysis Project</h1>
-        <h2>Fantasy User Rankings: Help each other win.</h2>
+        <h2>Fantasy Basketball Rankings: Draft a beast team.</h2>
         <br>
-        <p>(the more user input we get, the better the ranking. VOTE!!!)</p>
+        <p>(ranking algorithm is pretty <a href="https://twitter.com/hashtag/basic?lang=en">#basic</a> but i will improve it later!!!)</p>
       </div>
     </div>
   </header>
@@ -33,10 +39,9 @@
     <div class="container">
       <h3>2014-15 Fantasy Rankings</h3>
       <div class="table-responsive">
-        <table id="stats_main" class="table .table-condensed sortable">
+        <table id="stats_main" class="table table-bordered sortable">
           <thead>
-            <tr class="row">
-              <th>VOTE</th> 
+            <tr>
               <th>Name</th>
               <th>GPV</th>
               <th>FGMV</th>
@@ -57,39 +62,24 @@
           </thead>
           <tbody>
             {%for player in players %}
-            <tr class="row">
-              <td>
-                <div class="text-center">
-                  <a href="https://twitter.com/hashtag/basic?lang=en">
-                    <img src="{% static 'img/upvote.png' %}" id="vote_button">
-                  </a>
-                </div>
-
-                <div class="text-center" style="margin: 0px -5px;">{{player.pts | floatformat:0}}</div>
-
-                <div class="text-center">
-                  <a href="https://twitter.com/hashtag/basic?lang=en">
-                    <img src="{% static 'img/downvote.png' %}" id="vote_button">
-                  </a>
-                </div>
-              </td>
+            <tr>
               <td><a href="{% url 'stats:gamelog' p_id=player.id %}">{{player.first_name | title}} {{player.last_name | title}}</a></td>
-              <td id="name_align">{{player.games_played | floatformat:2}}</td>
-              <td id="name_align">{{player.fgm | floatformat:2}}</td>
-              <td id="name_align">{{player.fg_pct | floatformat:2}}</td>
-              <td id="name_align">{{player.fg3m | floatformat:2}}</td>
-              <td id="name_align">{{player.fg3_pct | floatformat:2}}</td>
-              <td id="name_align">{{player.ftm | floatformat:2}}</td>
-              <td id="name_align">{{player.ft_pct | floatformat:2}}</td>
-              <td id="name_align">{{player.reb | floatformat:2}}</td>
-              <td id="name_align">{{player.ast | floatformat:2}}</td>
-              <td id="name_align">{{player.tov | floatformat:2}}</td>
-              <td id="name_align">{{player.atr | floatformat:2}}</td>
-              <td id="name_align">{{player.stl | floatformat:2}}</td>
-              <td id="name_align">{{player.blk | floatformat:2}}</td>
-              <td id="name_align">{{player.pts | floatformat:2}}</td>
-              <td id="name_align>"{{player.getSum | floatformat:2}}</td>
-          </tr>
+              <td>{{player.games_played | floatformat:2}}</td>
+              <td>{{player.fgm | floatformat:2}}</td>
+              <td>{{player.fg_pct | floatformat:2}}</td>
+              <td>{{player.fg3m | floatformat:2}}</td>
+              <td>{{player.fg3_pct | floatformat:2}}</td>
+              <td>{{player.ftm | floatformat:2}}</td>
+              <td>{{player.ft_pct | floatformat:2}}</td>
+              <td>{{player.reb | floatformat:2}}</td>
+              <td>{{player.ast | floatformat:2}}</td>
+              <td>{{player.tov | floatformat:2}}</td>
+              <td>{{player.atr | floatformat:2}}</td>
+              <td>{{player.stl | floatformat:2}}</td>
+              <td>{{player.blk | floatformat:2}}</td>
+              <td>{{player.pts | floatformat:2}}</td>
+              <td>{{player.getSum | floatformat:2}}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>

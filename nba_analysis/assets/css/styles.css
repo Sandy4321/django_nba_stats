@@ -16,6 +16,11 @@ section{
   margin: -30px 0 0 0;
 }
 
+.table th,
+.table td {
+   text-align: center;   
+}
+
 /*********
 GENERAL Table Styles
 **********/
@@ -58,16 +63,15 @@ Game Log Page
   font-size: 1.6em;
 }
 
-
 /*********
 Fantasy User Ranking Page
 **********/
 #vote_button{
-  max-width:1%;
+  max-width:25%;
   height:auto;
   margin:0px -40px;
 }
 
-#name_align{
-  vertical-align:center;
+.table tbody>tr>td.name_align{
+    vertical-align: middle;
 }

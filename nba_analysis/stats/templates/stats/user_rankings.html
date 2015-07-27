@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% block title %} NBA Statistical Analysis Project {% endblock %}
+{% block content %}
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand">NBA Stats Analysis</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
+          <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fantasy Basketball Analysis <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="active"><a href="{% url 'stats:user_rank' %}">User Rankings</a></li>
+              <li><a href="{% url 'stats:fantasy' %}">Calculated Rankings</a></li>
+            </ul>
+          </li>
+          <li><a>Statistical Learning</a></li>
+          <li><a>About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>NBA Statistical Analysis Project</h1>
+        <h2>Fantasy User Rankings: Help each other win.</h2>
+        <br>
+        <p>(the more user input we get, the better the ranking. VOTE!!!)</p>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <h3>2014-15 Fantasy User Rankings</h3>
+      <div class="table-responsive">
+        <table id="stats_main" class="table .table-condensed sortable">
+          <thead>
+            <tr class="row">
+              <th>VOTE</th> 
+              <th>Name</th>
+              <th>GPV</th>
+              <th>FGMV</th>
+              <th>FG%V</th>
+              <th>3PMV</th>
+              <th>3P%V</th>
+              <th>FTMV</th>
+              <th>FT%V</th>
+              <th>REBV</th>
+              <th>ASTV</th>
+              <th>TOV</th>
+              <th>A/TV</th>
+              <th>STLV</th>
+              <th>BLKV</th>
+              <th>PTSV</th>
+              <th>TOT</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for player in players %}
+            <tr class="row">
+              <td sorttable_customkey="{{player.user_rank}}">
+                <form action="/upvote/" method="POST">
+                  <input type="hidden" name="player" value="{{player.id}}">
+                  <input id="vote_button" type="image" src="{% static 'img/upvote.png' %}">
+                </form>
+
+                <div class="text-center" style="margin: 0px -5px;">{{player.user_rank}}</div>
+
+                <form action="/downvote/" method="POST">
+                  <input type="hidden" name="player" value="{{player.id}}">
+                  <input id="vote_button" type="image" src="{% static 'img/downvote.png' %}">
+                </form>
+              </td>
+              <td class="name_align"><a href="{% url 'stats:gamelog' p_id=player.id %}">{{player.first_name | title}} {{player.last_name | title}}</a></td>
+              <td class="name_align">{{player.games_played | floatformat:2}}</td>
+              <td class="name_align">{{player.fgm | floatformat:2}}</td>
+              <td class="name_align">{{player.fg_pct | floatformat:2}}</td>
+              <td class="name_align">{{player.fg3m | floatformat:2}}</td>
+              <td class="name_align">{{player.fg3_pct | floatformat:2}}</td>
+              <td class="name_align">{{player.ftm | floatformat:2}}</td>
+              <td class="name_align">{{player.ft_pct | floatformat:2}}</td>
+              <td class="name_align">{{player.reb | floatformat:2}}</td>
+              <td class="name_align">{{player.ast | floatformat:2}}</td>
+              <td class="name_align">{{player.tov | floatformat:2}}</td>
+              <td class="name_align">{{player.atr | floatformat:2}}</td>
+              <td class="name_align">{{player.stl | floatformat:2}}</td>
+              <td class="name_align">{{player.blk | floatformat:2}}</td>
+              <td class="name_align">{{player.pts | floatformat:2}}</td>
+              <td class="name_align">{{player.getSum | floatformat:2}}</td>
+          </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/sorttable.js' %}"></script>
+    <script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}
