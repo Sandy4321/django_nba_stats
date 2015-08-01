@@ -62,21 +62,29 @@
             </tr>
           </thead>
           <tbody>
+
             {%for player in players %}
             <tr class="row">
               <td sorttable_customkey="{{player.user_rank}}">
-                <form action="/upvote/" method="POST">
-                  <input type="hidden" name="player" value="{{player.id}}">
+                <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="player_id" value="{{player.id}}">
+                  <input type="hidden" name="voteType" value="up">
+                  <input type="hidden" name="prevVote" value="no">
                   <input id="vote_button" type="image" src="{% static 'img/upvote.png' %}">
                 </form>
 
                 <div class="text-center" style="margin: 0px -5px;">{{player.user_rank}}</div>
 
-                <form action="/downvote/" method="POST">
-                  <input type="hidden" name="player" value="{{player.id}}">
+                <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="player_id" value="{{player.id}}">
+                  <input type="hidden" name="voteType" value="down">
+                  <input type="hidden" name="prevVote" value="no">
                   <input id="vote_button" type="image" src="{% static 'img/downvote.png' %}">
                 </form>
               </td>
+
               <td class="name_align"><a href="{% url 'stats:gamelog' p_id=player.id %}">{{player.first_name | title}} {{player.last_name | title}}</a></td>
               <td class="name_align">{{player.games_played | floatformat:2}}</td>
               <td class="name_align">{{player.fgm | floatformat:2}}</td>

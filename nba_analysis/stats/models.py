@@ -10,6 +10,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django import forms
 
 class Player2015AverageStat(models.Model):
     player_id = models.IntegerField(primary_key=True)
@@ -171,6 +172,14 @@ class UserRankings2015(models.Model):
             self.fg_pct + self.fg3m + self.fg3_pct + self.ftm +\
             self.ft_pct + self.reb + self.ast + self.stl + self.blk+\
             self.tov + self.atr + self.pts
+
+    def upvote(self):
+        self.user_rank += 1
+        self.save()
+
+    def downvote(self):
+        self.user_rank -= 1
+        self.save()
 
     class Meta:
         managed = False
