@@ -19,10 +19,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from . import views
 
+admin.autodiscover()
 urlpatterns = [
     url(r'^stats/', include('stats.urls', namespace='stats')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.home),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

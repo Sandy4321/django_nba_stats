@@ -24,6 +24,7 @@ $(document).ready(function(){
 
     else{
       $prevVoteManip.attr("value","no");
+      
       //changing image of the arrow
       if(voteType == "up") $(this).children('input[id="vote_button"]').attr("src", "/static/img/upvote.png");
       else $(this).children('input[id="vote_button"]').attr("src", "/static/img/downvote.png");
