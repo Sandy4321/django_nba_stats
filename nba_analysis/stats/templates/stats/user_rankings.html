@@ -22,11 +22,13 @@
           <li><a>Statistical Learning</a></li>
           <li><a>About</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right authen">
           {% if user and not user.is_anonymous %}
+            <input type="hidden" name="authen_check" value="true">
             <li><a>Hello {{ user.get_full_name|default:user.username}}!</a></li>
             <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></li>
           {% else %}
+            <input type="hidden" name="authen_check" value="false">
             <li><a>Hello Guest! Login with:</a></li>
             <li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><img src="{% static 'img/facebookicon.png' %}" alt="googleicon" class="icon"></a></li>
             <li><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><img src="{% static 'img/googleicon.png' %}" alt="googleicon" class="icon"></a></li>
@@ -84,7 +86,7 @@
                   <input id="vote_button" type="image" src="{% static 'img/upvote.png' %}">
                 </form>
 
-                <div class="text-center" style="margin: 0px -5px;">{{player.user_rank}}</div>
+                <div class="text-center num_votes" style="margin: 0px -5px;">{{player.user_rank}}</div>
 
                 <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
                   {% csrf_token %}

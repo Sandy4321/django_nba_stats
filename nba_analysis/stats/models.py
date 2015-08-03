@@ -173,12 +173,16 @@ class UserRankings2015(models.Model):
             self.ft_pct + self.reb + self.ast + self.stl + self.blk+\
             self.tov + self.atr + self.pts
 
-    def upvote(self):
-        self.user_rank += 1
+    def upvote(self, count = 1):
+        print(self.user_rank)
+        self.user_rank += count
+        print(self.user_rank)
         self.save()
 
-    def downvote(self):
-        self.user_rank -= 1
+    def downvote(self, count=1):
+        print(self.user_rank)
+        self.user_rank += count
+        print(self.user_rank)
         self.save()
 
     class Meta:
