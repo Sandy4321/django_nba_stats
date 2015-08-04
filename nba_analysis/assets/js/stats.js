@@ -29,6 +29,7 @@ $(document).ready(function(){
       var player_id = data[1].value;
       var voteType = data[2].value;
       var prevVote = data[3].value;
+      var unvote = "true";
       var count = 0;
 
       //if user clicked on upvote
@@ -39,6 +40,7 @@ $(document).ready(function(){
         var $downDataArray = $downData.serializeArray();
         var prevDownVote = $downDataArray[3].value;
         if(prevDownVote == "yes"){
+          unvote = "false";
           count += 1
           $downData.children('input[name="prevVote"]').attr("value","no");
           $downData.children('input[id="vote_button"]').attr("src", "/static/img/downvote.png");
@@ -46,6 +48,7 @@ $(document).ready(function(){
 
         var $prevVoteManip = $(this).children('input[name="prevVote"]');
         if(prevVote == 'no'){
+          unvote = "false";
           count += 1
           $prevVoteManip.attr("value","yes");
           $(this).children('input[id="vote_button"]').attr("src", "/static/img/upvote_clicked.png");
@@ -66,6 +69,7 @@ $(document).ready(function(){
         var $upDataArray = $upData.serializeArray();
         var prevUpVote = $upDataArray[3].value;
         if(prevUpVote == "yes"){
+          unvote = "false";
           count -= 1
           $upData.children('input[name="prevVote"]').attr("value","no");
           $upData.children('input[id="vote_button"]').attr("src", "/static/img/upvote.png");
@@ -73,6 +77,7 @@ $(document).ready(function(){
 
         var $prevVoteManip = $(this).children('input[name="prevVote"]');
         if(prevVote == 'no'){
+          unvote = "false";
           count -= 1
           $prevVoteManip.attr("value","yes");
           $(this).children('input[id="vote_button"]').attr("src", "/static/img/downvote_clicked.png");
@@ -87,6 +92,7 @@ $(document).ready(function(){
         changeNumber += count;
         $(this).prev().text(changeNumber)
       }
+      console.log(unvote);
       $.ajax({
         type: "POST",
         url:"/stats/userrank/vote/",
@@ -94,7 +100,8 @@ $(document).ready(function(){
           'csrfmiddlewaretoken': csrf,
           'player_id': player_id,
           'voteType': voteType,
-          'count': count
+          'count': count,
+          'unvote': unvote
         },
         success: function(){
           console.log("Vote was submitted");

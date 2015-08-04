@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template.context import RequestContext
-from .models import Player2015AverageStat, GameLog2015, IdPlayer, stdev2015, UserRankings2015
+from .models import Player2015AverageStat, GameLog2015, IdPlayer, stdev2015, UserRankings2015, AuthUser, UserVotes
 
 def basic_stats(request):
     players = Player2015AverageStat.objects.all()
@@ -34,11 +34,46 @@ def vote(request):
             player = get_object_or_404(UserRankings2015, id=player_id)
             updown = request.POST.get('voteType')
             count = int(request.POST.get('count'))
+            user = get_object_or_404(AuthUser, username=request.user)
+            unvote = request.POST.get('unvote')
+
+            #add a unvote option here later
+            prevVote = UserVotes.objects.all().filter(user_id=user.id, player_id = player_id)
             if updown == "up":
                 player.upvote(count=count)
+                if not prevVote: #player was not voted by this user before
+                    print("new up entry")
+                    vote_update = UserVotes(user_id=user.id, player_id=player_id, voted=True, up_down=True)
+                    vote_update.save()
+                else:
+                    if unvote == "true":
+                        print("remove up entry")
+                        vote_update = UserVotes(id=prevVote[0].id, user_id=user.id, player_id=player_id, voted=False, up_down=True)
+                        vote_update.save(force_update=True)
+                    else:
+                        print("update up entry")
+                        vote_update = UserVotes(id=prevVote[0].id, user_id=user.id, player_id=player_id, voted=True, up_down=True)
+                        vote_update.save(force_update=True)
+                print("Saved Up")
+
             elif updown == "down":
                 player.downvote(count=count)
+                if not prevVote:
+                    print("new down entry")
+                    vote_update = UserVotes(user_id=user.id, player_id=player_id, voted=True, up_down=False)
+                    vote_update.save()
+                else:
+                    if unvote == "true":
+                        print("remove down entry")
+                        vote_update = UserVotes(id=prevVote[0].id, user_id=user.id, player_id=player_id, voted=False, up_down=False)
+                        vote_update.save(force_update=True)
+                    else:
+                        print("update down entry")
+                        vote_update = UserVotes(id=prevVote[0].id, user_id=user.id, player_id=player_id, voted=True, up_down=False)
+                        vote_update.save(force_update=True)
+                print("Saved Down")
 
+    #if user did not enable javascript or jquery or something
     else:
         player_id = request.POST.get('player_id')
         player = get_object_or_404(UserRankings2015, id=player_id)
