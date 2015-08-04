@@ -106,3 +106,7 @@ img.lightbox-icon2{
   margin-right: 10px;
   margin-left: 10px;
 }
+
+#lightbox-text{
+    font-family: 'Nixie One', cursive;
+}

@@ -5,8 +5,8 @@ var $authen = $("input.authen")[0];
 //Problem: hard coded styles so that everything is centered correctly on a large screen but not responsive on mobile.
 function displayOverlay(){
   var $overlay = $('<div id="overlay" class="row"></div>');
-  var $msg1 = $('<div class="span12"><h1 class="text-center">you need to be logged in to vote!</h1></div>');
-  var $msg2 = $('<div class="span12"><p class="text-center">Please login with Facebook or Google+</p></div>');
+  var $msg1 = $('<div class="span12"><h1 id="lightbox-text" class="text-center">you need to be logged in to vote!</h1></div>');
+  var $msg2 = $('<div class="span12"><p id="lightbox-text" class="text-center">Please login with Facebook or Google+</p></div>');
   var $socialIcons = $('<div class="span3 offset3"><a href="/login/facebook/?next=/stats/"><img class="lightbox-icon1" src="/static/img/facebookicon.png" alt="facebookicon"></a><a href="/login/google-oauth2/?next=/stats/"><img class="lightbox-icon2" src="/static/img/googleicon.png" alt="googleicon"></a></div>');
   $overlay.append($msg1);
   $overlay.append($msg2);
