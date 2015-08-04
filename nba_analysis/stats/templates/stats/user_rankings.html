@@ -22,13 +22,13 @@
           <li><a>Statistical Learning</a></li>
           <li><a>About</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right authen">
+        <ul class="nav navbar-nav navbar-right">
           {% if user and not user.is_anonymous %}
-            <input type="hidden" name="authen_check" value="true">
+            <input class="authen" type="hidden" name="authen_check" value="true">
             <li><a>Hello {{ user.get_full_name|default:user.username}}!</a></li>
             <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></li>
           {% else %}
-            <input type="hidden" name="authen_check" value="false">
+            <input class="authen" type="hidden" name="authen_check" value="false">
             <li><a>Hello Guest! Login with:</a></li>
             <li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><img src="{% static 'img/facebookicon.png' %}" alt="googleicon" class="icon"></a></li>
             <li><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><img src="{% static 'img/googleicon.png' %}" alt="googleicon" class="icon"></a></li>
@@ -123,5 +123,6 @@
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/sorttable.js' %}"></script>
+    <script src="{% static 'js/jquery.lightbox_me.js' %}"></script>
     <script src="{% static 'js/stats.js' %}"></script>
 {% endblock %}

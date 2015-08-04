@@ -81,3 +81,28 @@ Fantasy User Ranking Page
 .table tbody>tr>td.name_align{
     vertical-align: middle;
 }
+
+/****
+LOGIN OVERLAY
+*****/
+
+#overlay{
+  background:LightGray;
+  width:55%;
+  height:30%;
+  position:absolute;
+  top:25%;
+  left:25%;
+}
+img.lightbox-icon1{
+  height: auto;
+  width: auto;
+  margin-right: 10px;
+  margin-left: 300px;
+}
+img.lightbox-icon2{
+  height: auto;
+  width: auto;
+  margin-right: 10px;
+  margin-left: 10px;
+}
