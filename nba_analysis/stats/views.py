@@ -7,7 +7,6 @@ from .models import Player2015AverageStat, GameLog2015, IdPlayer, stdev2015, Use
 def basic_stats(request):
     players = Player2015AverageStat.objects.all()
     login_context = RequestContext(request,{'user':request.user})
-
     return render(request, 'stats/stats_main.html', {'players': players}, context_instance=login_context)
 
 def game_log(request, p_id):
@@ -24,8 +23,22 @@ def fantasy_rankings(request):
 
 def user_rankings(request):
     players = sorted(UserRankings2015.objects.all(), key=lambda player: player.user_rank, reverse=True)
-    login_context = RequestContext(request,{'request': request, 'user': request.user})
-    return render(request, 'stats/user_rankings.html', {'players': players}, context_instance=login_context)
+    temp_user = request.user
+    user_vote = UserVotes.objects.all().filter(user_id=temp_user.id)
+    voted_players = {}
+    voted_players_list = []
+    for vote in user_vote:
+        if vote.voted == 1:
+            voted_players_list.append(vote.player_id) 
+            voted_players[vote.player_id]=vote.up_down
+    for player in players:
+        if player.id in voted_players_list:
+            player.prevVoteTemp = True
+            player.upOrDownTemp = voted_players[player.id]
+        else:
+            player.prevVoteTemp = False
+    login_context = RequestContext(request,{'request': request, 'user': temp_user})
+    return render(request, 'stats/user_rankings.html', {'players': players,'voted_players':voted_players}, context_instance=login_context)
 
 def vote(request):
     if request.is_ajax():

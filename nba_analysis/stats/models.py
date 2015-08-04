@@ -165,6 +165,8 @@ class UserRankings2015(models.Model):
     tov = models.FloatField(blank=True, null=True)
     atr = models.FloatField(blank=True, null=True)
     pts = models.FloatField(blank=True, null=True)
+    prevVoteTemp = None
+    upOrDownTemp = None
     user_rank = models.IntegerField(blank=True, null=True)
 
     def getSum(self):

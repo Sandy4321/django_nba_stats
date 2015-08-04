@@ -78,23 +78,63 @@
             {%for player in players %}
             <tr class="row">
               <td sorttable_customkey="{{player.user_rank}}">
-                <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="player_id" value="{{player.id}}">
-                  <input type="hidden" name="voteType" value="up">
-                  <input type="hidden" name="prevVote" value="no">
-                  <input id="vote_button" type="image" src="{% static 'img/upvote.png' %}">
-                </form>
 
-                <div class="text-center num_votes" style="margin: 0px -5px;">{{player.user_rank}}</div>
+                {% if player.prevVoteTemp == False %}
+                  <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input type="hidden" name="voteType" value="up">
+                    <input type="hidden" name="prevVote" value="no">
+                    <input id="vote_button" type="image" src="{% static 'img/upvote.png' %}">
+                  </form>
 
-                <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="player_id" value="{{player.id}}">
-                  <input type="hidden" name="voteType" value="down">
-                  <input type="hidden" name="prevVote" value="no">
-                  <input id="vote_button" type="image" src="{% static 'img/downvote.png' %}">
-                </form>
+                  <div class="text-center num_votes" style="margin: 0px -5px;">{{player.user_rank}}</div>
+
+                  <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input type="hidden" name="voteType" value="down">
+                    <input type="hidden" name="prevVote" value="no">
+                    <input id="vote_button" type="image" src="{% static 'img/downvote.png' %}">
+                  </form>
+                {%elif player.prevVoteTemp == True and player.upOrDownTemp == True %}
+                  <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input type="hidden" name="voteType" value="up">
+                    <input type="hidden" name="prevVote" value="yes">
+                    <input id="vote_button" type="image" src="{% static 'img/upvote_clicked.png' %}">
+                  </form>
+
+                  <div class="text-center num_votes" style="margin: 0px -5px;">{{player.user_rank}}</div>
+
+                  <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input type="hidden" name="voteType" value="down">
+                    <input type="hidden" name="prevVote" value="no">
+                    <input id="vote_button" type="image" src="{% static 'img/downvote.png' %}">
+                  </form>
+                {%else%}
+                  <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input type="hidden" name="voteType" value="up">
+                    <input type="hidden" name="prevVote" value="no">
+                    <input id="vote_button" type="image" src="{% static 'img/upvote.png' %}">
+                  </form>
+
+                  <div class="text-center num_votes" style="margin: 0px -5px;">{{player.user_rank}}</div>
+
+                  <form class="vote_form" action="{% url 'stats:vote' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="player_id" value="{{player.id}}">
+                    <input type="hidden" name="voteType" value="down">
+                    <input type="hidden" name="prevVote" value="yes">
+                    <input id="vote_button" type="image" src="{% static 'img/downvote_clicked.png' %}">
+                  </form>
+                {% endif %}
+
               </td>
 
               <td class="name_align"><a href="{% url 'stats:gamelog' p_id=player.id %}">{{player.first_name | title}} {{player.last_name | title}}</a></td>
