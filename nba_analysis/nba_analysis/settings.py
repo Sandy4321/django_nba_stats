@@ -42,6 +42,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,6 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    #'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'nba_analysis.urls'
@@ -137,3 +139,13 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "534711614100-nbju1qbg24v6cgb8f7jbcdqrt6s7j1bp.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "ie7kimhZqO2G77l2Qo0FkFwG"
 SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
 SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
+
+#CACHING
+CACHES = {
+  'default': {
+    'BACKEND': 'redis_cache.RedisCache',
+    'LOCATION': '/var/run/redis/redis.sock',
+  },
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
