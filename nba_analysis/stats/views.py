@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 from django.views.decorators.cache import cache_page, never_cache
 from .models import Player2015AverageStat, GameLog2015, IdPlayer, stdev2015, UserRankings2015, AuthUser, UserVotes
 
-@cache_page(60 * 15)
+@never_cache
 def basic_stats(request):
     players = Player2015AverageStat.objects.all()
     login_context = RequestContext(request,{'user':request.user})
@@ -18,7 +18,6 @@ def game_log(request, p_id):
     login_context = RequestContext(request,{'user':request.user})
     return render(request, 'stats/game_log.html', {'gamelog': gamelog, 'player_name': player_name, 'player_avg': player_avg}, context_instance=login_context)
 
-@cache_page(60 * 15)
 def fantasy_rankings(request):
     players = sorted(stdev2015.objects.all(), key=lambda player: player.getSum(), reverse=True)
     login_context = RequestContext(request,{'user':request.user})

@@ -35,6 +35,8 @@
       </div>
     </div>
   </nav>
+  {% load cache %}
+  {% cache 900 fantasy_ranking %}
   <header>
     <div class="jumbotron">
       <div class="container">
@@ -96,6 +98,7 @@
       </div>
     </div>
   </section>
+  {% endcache %}
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/sorttable.js' %}"></script>
