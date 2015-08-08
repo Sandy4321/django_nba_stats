@@ -84,12 +84,12 @@ DATABASES = {
         'NAME': 'nba_analysis',
         'USER': 'fred',
         'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        #'HOST': '',
+        #'PORT': '',
 	
-	#FOR REMOTE DB	
-        #'HOST': '22.22.22.3',
-        #'PORT': '3306',
+	#FOR REMOTE DB  
+        'HOST': '10.134.10.5',
+        'PORT': '3306',	
     }
 }
 
