@@ -153,5 +153,3 @@ CACHES = {
     'LOCATION': '/var/run/redis/redis.sock',
   },
 }
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
