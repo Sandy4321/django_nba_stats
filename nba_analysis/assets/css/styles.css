@@ -27,6 +27,16 @@ img.icon{
   margin: -10px -10px;
 }
 
+p{
+  font-family: 'Nixie One', cursive;
+  font-size: 1.5em;
+}
+
+p div{
+  font-family: 'Nixie One', cursive;
+  font-size: 1.5em;
+}
+
 /*********
 GENERAL Table Styles
 **********/
