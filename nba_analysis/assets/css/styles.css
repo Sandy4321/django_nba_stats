@@ -43,11 +43,35 @@ table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sor
 }
 
 /*********
-Imagesaaaaaaaaaaaaaaaaaaaa
+Player Images
 **********/
 #player_img{
   background-color: #EEE;
   border-radius: 100%;
+}
+
+
+/*********
+Home Page (root)
+**********/
+div#home-parent {
+  margin-top: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align:center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.home-center {
+  font-family: 'Nixie One', cursive;
+  opacity: 1.0;
+  color:white;
+  text-align:center;
+  margin:auto;
+}
+
+body#root{
+  background-image: url("../img/tweed.png")
 }
 
 /*********

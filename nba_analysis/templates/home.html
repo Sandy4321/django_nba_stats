@@ -2,8 +2,15 @@
 {% load static from staticfiles %}
 {% block title %} NBA Statistical Analysis Project {% endblock %}
 {% block content %}
-<nav>
-  <a href="{% url 'views.home' %}">Home</a>
-  <a href="{% url 'stats:basicstats' %}">Stats</a>
-</nav>
+<body id="root">
+  <div id="home-parent">
+    <div class="home-center"><h1>Welcome to my NBA Stats Project!</h1></div>
+    <div class="home-center"><h2>Is this an accurate portrayal of you in your fantasy basketball league?</h2></div>
+    <div class="home-center"><img src="http://media.giphy.com/media/c14TAuvWFjnhe/giphy.gif"></div>
+    <div class="home-center"><h3>With carefully calculated rankings and predictions, you no longer have to be the joke of your league.</h3></div>
+    <div class="home-center"><a href="{% url 'stats:basicstats' %}">
+      <button type="button" class="btn btn-default" aria-label="Left Align">Click here to #StartWinning</button>
+    </a></div>
+  </div>
+</body>
 {% endblock %}
