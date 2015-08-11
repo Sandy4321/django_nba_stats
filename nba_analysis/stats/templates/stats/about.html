@@ -13,15 +13,15 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
-          <li class="dropdown active">
+          <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fantasy Basketball Analysis <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="{% url 'stats:user_rank' %}">User Rankings</a></li>
-              <li class="active"><a href="{% url 'stats:fantasy' %}">Calculated Rankings</a></li>
+              <li><a href="{% url 'stats:fantasy' %}">Calculated Rankings</a></li>
             </ul>
           </li>
           <li><a href="{% url 'stats:learning' %}">Statistical Learning</a></li>
-          <li><a href="{% url 'stats:about' %}">About</a></li>
+          <li class="active"><a href="{% url 'stats:about' %}">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user and not user.is_anonymous %}
@@ -36,70 +36,21 @@
       </div>
     </div>
   </nav>
-  {% load cache %}
-  {% cache 900 fantasy_ranking %}
   <header>
     <div class="jumbotron">
       <div class="container">
         <h1>NBA Statistical Analysis Project</h1>
-        <h2>Fantasy Basketball Rankings: Draft a beast team.</h2>
+        <h2>About: Behind the scene stuff.</h2>
         <br>
-        <p>(ranking algorithm is pretty <a href="https://twitter.com/hashtag/basic?lang=en">#basic</a> but i will improve it later!!!)</p>
+        <p>(learn more about the site and me!!!)</p>
       </div>
     </div>
   </header>
   <section>
     <div class="container">
-      <h3>2014-15 Fantasy Rankings</h3>
-      <div class="table-responsive">
-        <table id="stats_main" class="table table-bordered sortable">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>GPV</th>
-              <th>FGMV</th>
-              <th>FG%V</th>
-              <th>3PMV</th>
-              <th>3P%V</th>
-              <th>FTMV</th>
-              <th>FT%V</th>
-              <th>REBV</th>
-              <th>ASTV</th>
-              <th>TOV</th>
-              <th>A/TV</th>
-              <th>STLV</th>
-              <th>BLKV</th>
-              <th>PTSV</th>
-              <th>TOT</th>
-            </tr>
-          </thead>
-          <tbody>
-            {%for player in players %}
-            <tr>
-              <td><a href="{% url 'stats:gamelog' p_id=player.id %}">{{player.first_name | title}} {{player.last_name | title}}</a></td>
-              <td>{{player.games_played | floatformat:2}}</td>
-              <td>{{player.fgm | floatformat:2}}</td>
-              <td>{{player.fg_pct | floatformat:2}}</td>
-              <td>{{player.fg3m | floatformat:2}}</td>
-              <td>{{player.fg3_pct | floatformat:2}}</td>
-              <td>{{player.ftm | floatformat:2}}</td>
-              <td>{{player.ft_pct | floatformat:2}}</td>
-              <td>{{player.reb | floatformat:2}}</td>
-              <td>{{player.ast | floatformat:2}}</td>
-              <td>{{player.tov | floatformat:2}}</td>
-              <td>{{player.atr | floatformat:2}}</td>
-              <td>{{player.stl | floatformat:2}}</td>
-              <td>{{player.blk | floatformat:2}}</td>
-              <td>{{player.pts | floatformat:2}}</td>
-              <td>{{player.getSum | floatformat:2}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+      <h1>COMING SOON.</h1>
     </div>
   </section>
-  {% endcache %}
 </body>
 {% endblock %}
 {% block scripts %}

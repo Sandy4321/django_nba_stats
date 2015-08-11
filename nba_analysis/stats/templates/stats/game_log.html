@@ -14,8 +14,8 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
           <li><a href="{% url 'stats:fantasy' %}">Fantasy Basketball Analysis</a></li>
-          <li><a>Statistical Learning</a></li>
-          <li><a>About</a></li>
+          <li><a href="{% url 'stats:learning' %}">Statistical Learning</a></li>
+          <li><a href="{% url 'stats:about' %}">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user and not user.is_anonymous %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+{% block title %} NBA Statistical Analysis Project {% endblock %}
+{% block content %}
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a href="/" class="navbar-brand">NBA Stats Project</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'stats:basicstats' %}">Basic Statistics</a></li>
+          <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fantasy Basketball Analysis <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'stats:user_rank' %}">User Rankings</a></li>
+              <li><a href="{% url 'stats:fantasy' %}">Calculated Rankings</a></li>
+            </ul>
+          </li>
+          <li class="active"><a href="{% url 'stats:learning' %}">Statistical Learning</a></li>
+          <li><a href="{% url 'stats:about' %}">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user and not user.is_anonymous %}
+            <li><a>Hello {{ user.get_full_name|default:user.username}}!</a></li>
+            <li><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></li>
+          {% else %}
+            <li><a>Hello Guest! Login with:</a></li>
+            <li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><img src="{% static 'img/facebookicon.png' %}" alt="googleicon" class="icon"></a></li>
+            <li><a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><img src="{% static 'img/googleicon.png' %}" alt="googleicon" class="icon"></a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>NBA Statistical Analysis Project</h1>
+        <h2>Statistical Learning: Using teh mathz to find the best picks.</h2>
+        <br>
+        <p>(no more overrated players, no more missed sleepers!!!)</p>
+      </div>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <h1>COMING SOON.</h1>
+    </div>
+  </section>
+</body>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/sorttable.js' %}"></script>
+    <script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}

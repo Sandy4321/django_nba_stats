@@ -5,11 +5,21 @@ from django.template.context import RequestContext
 from django.views.decorators.cache import cache_page, never_cache
 from .models import Player2015AverageStat, GameLog2015, IdPlayer, stdev2015, UserRankings2015, AuthUser, UserVotes
 
-@never_cache
 def basic_stats(request):
     players = Player2015AverageStat.objects.all()
     login_context = RequestContext(request,{'user':request.user})
+    print(request.path)
     return render(request, 'stats/stats_main.html', {'players': players}, context_instance=login_context)
+
+def stats_learning(request):
+    login_context = RequestContext(request,{'user':request.user})
+    print(request.path)
+    return render(request, 'stats/stats_learning.html', context_instance=login_context)
+
+def about(request):
+    login_context = RequestContext(request,{'user':request.user})
+    print(request.path)
+    return render(request, 'stats/about.html', context_instance=login_context)
 
 def game_log(request, p_id):
     player_name = get_object_or_404(IdPlayer, id=p_id)
