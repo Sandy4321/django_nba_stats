@@ -86,11 +86,11 @@ DATABASES = {
         'PASSWORD': '',
         #'HOST': '',
         #'PORT': '',
-	
-	#FOR REMOTE DB  
-        'HOST': '10.134.10.5',
-        'PORT': '3306',	
-    }
+
+        #FOR REMOTE DB  
+        'HOST': '192.241.211.19',
+        'PORT': '3306',  
+  }
 }
 
 
@@ -145,7 +145,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
 SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
 USE_X_FORWARDED_HOST = True
 
-
+'''
 #CACHING
 CACHES = {
   'default': {
@@ -153,3 +153,4 @@ CACHES = {
     'LOCATION': '/var/run/redis/redis.sock',
   },
 }
+'''

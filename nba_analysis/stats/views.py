@@ -5,22 +5,26 @@ from django.template.context import RequestContext
 from django.views.decorators.cache import cache_page, never_cache
 from .models import Player2015AverageStat, GameLog2015, IdPlayer, stdev2015, UserRankings2015, AuthUser, UserVotes
 
+@never_cache
 def basic_stats(request):
     players = Player2015AverageStat.objects.all()
     login_context = RequestContext(request,{'user':request.user})
     print(request.path)
     return render(request, 'stats/stats_main.html', {'players': players}, context_instance=login_context)
 
+@never_cache
 def stats_learning(request):
     login_context = RequestContext(request,{'user':request.user})
     print(request.path)
     return render(request, 'stats/stats_learning.html', context_instance=login_context)
 
+@never_cache
 def about(request):
     login_context = RequestContext(request,{'user':request.user})
     print(request.path)
     return render(request, 'stats/about.html', context_instance=login_context)
 
+@never_cache
 def game_log(request, p_id):
     player_name = get_object_or_404(IdPlayer, id=p_id)
     player_avg = get_object_or_404(Player2015AverageStat, player_id=p_id)
@@ -28,6 +32,7 @@ def game_log(request, p_id):
     login_context = RequestContext(request,{'user':request.user})
     return render(request, 'stats/game_log.html', {'gamelog': gamelog, 'player_name': player_name, 'player_avg': player_avg}, context_instance=login_context)
 
+@never_cache
 def fantasy_rankings(request):
     players = sorted(stdev2015.objects.all(), key=lambda player: player.getSum(), reverse=True)
     login_context = RequestContext(request,{'user':request.user})
